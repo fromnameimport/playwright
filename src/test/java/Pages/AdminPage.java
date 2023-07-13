@@ -4,11 +4,8 @@ import Base.TestBase;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.BoundingBox;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 public class AdminPage extends TestBase {
     // ---------------------------test data---------------------------

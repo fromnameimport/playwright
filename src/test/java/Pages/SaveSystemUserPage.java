@@ -2,7 +2,10 @@ package Pages;
 
 import Base.TestBase;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.BoundingBox;
+
+import java.nio.file.Paths;
 
 public class SaveSystemUserPage extends TestBase {
     Locator usernameInput = page.locator("div:nth-child(2) > input").nth(0);

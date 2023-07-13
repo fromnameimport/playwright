@@ -1,8 +1,9 @@
 Feature: test
+  @functional
   Scenario: Verify login
     Given I open "Login" page
     Then I login with following credentials: username "Admin", password "admin123"
-    Given I verify that login is successful
+    And I verify that login is successful
   Scenario: Create, edit and delete post
     Given I go to "Buzz" page
     Then I create new post with following body: "Hi! It`s my new awesome post!"
@@ -23,7 +24,7 @@ Feature: test
     And I search user with following credentials: username "Test123", employee name "", user role "ESS" and status "Enabled"
     Then I verify search results for user with following credentials: username "Test123", user role "ESS" and status "Enabled"
   Scenario: Login with new user credentials
-    Given I logout
+    Given I logged out
     Then I login with following credentials: username "Test123", password "test12345"
     And I verify that login is successful
     Then I logout
@@ -32,5 +33,14 @@ Feature: test
     Then I go to "Admin" page
     Then I search user with following credentials: username "Test123", employee name "", user role "ESS" and status "Enabled"
     And I delete searched user
-#    Accesibillity
-#    Screenshots
+  @accessibility
+  Scenario: Pages accessibility
+#    Given  I open "Login" page
+    Given I logged out
+    Then I check the "Login" page for accessibility
+    Then I login with following credentials: username "Admin", password "admin123"
+    And I check the "Dashboard" page for accessibility
+    Then I go to "Admin" page
+    And I check the "Admin" page for accessibility
+    Then I go to "Buzz" page
+    And I check the "Buzz" page for accessibility

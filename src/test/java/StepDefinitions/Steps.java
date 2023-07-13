@@ -2,17 +2,15 @@ package StepDefinitions;
 
 import Base.TestBase;
 import Pages.*;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import io.cucumber.java.BeforeAll;
+import com.deque.html.axecore.playwright.AxeBuilder;
+import com.deque.html.axecore.results.AxeResults;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Steps extends TestBase {
     LoginPage loginPage = new LoginPage();
@@ -56,7 +54,7 @@ public class Steps extends TestBase {
         adminPage.openSystemUsersSearch();
     }
 
-    // ---------------------------VERIFICATION---------------------------
+    // ---------------------------VERIFICATION/CHECKS---------------------------
     @Then("I verify that login is successful")
     public void i_verify_that_login_is_successful() {
         Assert.assertEquals(page.url(), dashboardPageUrl);
@@ -86,6 +84,49 @@ public class Steps extends TestBase {
         Assert.assertEquals(adminPage.getSearchedUserRole(), userRole);
         Assert.assertEquals(adminPage.getSearchedUserStatus(), status);
     }
+    @Then("I check the {string} page for accessibility")
+    public void i_check_page_for_accessibility(String pageName) throws IOException {
+        AxeResults accessibilityScanResults = null;
+        FileWriter fileWriter = new FileWriter("reports/accessibility-violations.txt", true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        switch (pageName) {
+            case "Login" -> {
+                Assert.assertEquals(page.url(), loginPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Login Page--------------------");
+//                accessibilityScanResults.getViolations().forEach(s -> {
+//                    printWriter.write(String.valueOf(s));
+//                });
+            }
+            case "Dashboard" -> {
+                Assert.assertEquals(page.url(), dashboardPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Dashboard Page--------------------");
+//                accessibilityScanResults.getViolations().forEach(s -> {
+//                    printWriter.write(String.valueOf(s));
+//                });
+            }
+            case "Admin" -> {
+                Assert.assertEquals(page.url(), adminPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Admin Page--------------------");
+//                accessibilityScanResults.getViolations().forEach(s -> {
+//                    printWriter.write(String.valueOf(s));
+//                });
+            }
+            case "Buzz" -> {
+                Assert.assertEquals(page.url(), buzzPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Buzz Page--------------------");
+
+            }
+        }
+        accessibilityScanResults.getViolations().forEach(s -> {
+            printWriter.println(String.valueOf(s));
+        });
+        printWriter.close();
+    }
 
     // ---------------------------ACTIONS---------------------------
     @Then("I login with following credentials: username {string}, password {string}")
@@ -94,6 +135,11 @@ public class Steps extends TestBase {
     }
     @Then("I logout")
     public void i_logout() {
+        headerMenu.logout();
+    }
+    @Then("I logged out")
+    public void i_logged_out() {
+        if (page.url().equals(loginPageUrl)) return;
         headerMenu.logout();
     }
     @Then("I create new post with following body: {string}")
