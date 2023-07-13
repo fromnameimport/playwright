@@ -29,8 +29,8 @@ public class Steps extends TestBase {
     String adminRole = "Admin";
     String adminStatus = "Enabled";
 
+    // ---------------------------Temp Variables----------------------------
     String tempNewPostBody = "";
-    String tempSearchedUSerName = "";
 
     // ---------------------------NAVIGATION---------------------------
     @Given("I open {string} page")
@@ -54,7 +54,7 @@ public class Steps extends TestBase {
         adminPage.openSystemUsersSearch();
     }
 
-    // ---------------------------VERIFICATION/CHECKS---------------------------
+    // ---------------------------VERIFICATIONS---------------------------
     @Then("I verify that login is successful")
     public void i_verify_that_login_is_successful() {
         Assert.assertEquals(page.url(), dashboardPageUrl);
@@ -83,49 +83,6 @@ public class Steps extends TestBase {
         Assert.assertEquals(adminPage.getSearchedUsername(), username);
         Assert.assertEquals(adminPage.getSearchedUserRole(), userRole);
         Assert.assertEquals(adminPage.getSearchedUserStatus(), status);
-    }
-    @Then("I check the {string} page for accessibility")
-    public void i_check_page_for_accessibility(String pageName) throws IOException {
-        AxeResults accessibilityScanResults = null;
-        FileWriter fileWriter = new FileWriter("reports/accessibility-violations.txt", true);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-
-        switch (pageName) {
-            case "Login" -> {
-                Assert.assertEquals(page.url(), loginPageUrl);
-                accessibilityScanResults = new AxeBuilder(page).analyze();
-                printWriter.println("------------------Login Page--------------------");
-//                accessibilityScanResults.getViolations().forEach(s -> {
-//                    printWriter.write(String.valueOf(s));
-//                });
-            }
-            case "Dashboard" -> {
-                Assert.assertEquals(page.url(), dashboardPageUrl);
-                accessibilityScanResults = new AxeBuilder(page).analyze();
-                printWriter.println("------------------Dashboard Page--------------------");
-//                accessibilityScanResults.getViolations().forEach(s -> {
-//                    printWriter.write(String.valueOf(s));
-//                });
-            }
-            case "Admin" -> {
-                Assert.assertEquals(page.url(), adminPageUrl);
-                accessibilityScanResults = new AxeBuilder(page).analyze();
-                printWriter.println("------------------Admin Page--------------------");
-//                accessibilityScanResults.getViolations().forEach(s -> {
-//                    printWriter.write(String.valueOf(s));
-//                });
-            }
-            case "Buzz" -> {
-                Assert.assertEquals(page.url(), buzzPageUrl);
-                accessibilityScanResults = new AxeBuilder(page).analyze();
-                printWriter.println("------------------Buzz Page--------------------");
-
-            }
-        }
-        accessibilityScanResults.getViolations().forEach(s -> {
-            printWriter.println(String.valueOf(s));
-        });
-        printWriter.close();
     }
 
     // ---------------------------ACTIONS---------------------------
@@ -177,5 +134,41 @@ public class Steps extends TestBase {
         adminPage
                 .inputSearchData(adminUsername, "", adminRole, adminStatus);
         adminPage.submitSearch();
+    }
+
+    // ---------------------------ACCESSIBILITY---------------------------
+    @Then("I check the {string} page for accessibility")
+    public void i_check_page_for_accessibility(String pageName) throws IOException {
+        AxeResults accessibilityScanResults = null;
+        FileWriter fileWriter = new FileWriter("reports/accessibility-violations.txt", true);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        switch (pageName) {
+            case "Login" -> {
+                Assert.assertEquals(page.url(), loginPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Login Page--------------------");
+            }
+            case "Dashboard" -> {
+                Assert.assertEquals(page.url(), dashboardPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Dashboard Page--------------------");
+            }
+            case "Admin" -> {
+                Assert.assertEquals(page.url(), adminPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Admin Page--------------------");
+            }
+            case "Buzz" -> {
+                Assert.assertEquals(page.url(), buzzPageUrl);
+                accessibilityScanResults = new AxeBuilder(page).analyze();
+                printWriter.println("------------------Buzz Page--------------------");
+            }
+        }
+        assert accessibilityScanResults != null;
+        accessibilityScanResults
+                .getViolations()
+                .forEach(printWriter::println);
+        printWriter.close();
     }
 }

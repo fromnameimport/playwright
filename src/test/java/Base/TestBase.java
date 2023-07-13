@@ -13,35 +13,6 @@ public class TestBase {
         ).newContext();;
     public static Page page = context.newPage();;
 
-//    public static void initPlaywright() {
-//        playwright = Playwright.create();
-//    }
-//    public static void initChromiumContext() {
-//        context = playwright.chromium().launch(
-//                new BrowserType.LaunchOptions()
-//                        .setHeadless(false)
-//        ).newContext();
-//    }
-//    public static void createPage() {
-//        page = context.newPage();
-//    }
-
-//    public void openPage(String name) {
-//        switch (name) {
-//            case "Login" -> page.navigate(testData.getLoginPageUrl());
-//            case "Admin" -> page.navigate(testData.getAdminPageUrl());
-////            case "PIM" -> ;
-////            case "Leave" -> leavePageLink.click();
-////            case "Time" -> timePageLink.click();
-////            case "Recruitment" -> recruitmentPageLink.click();
-////            case "My Info" -> myInfoPageLink.click();
-////            case "Performance" -> performancePageLink.click();
-//            case "Dashboard" -> page.navigate(testData.getDashboardPageUrl());
-////            case "Directory" -> directoryPageLink.click();
-////            case "Maintenance" -> maintenancePageLink.click();
-//            case "Buzz" -> page.navigate(testData.getBuzzPageUrl());
-//        }
-//    }
     public static void closePage() {
         page.close();
     }
@@ -58,15 +29,4 @@ public class TestBase {
     public String getBuzzPageUrl() {
         return "https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz";
     }
-//    Page page = createPage(playwright);
-//    public Playwright initialization() {
-//        return Playwright.create();
-//    }
-//    public Page createPage(Playwright playwright) {
-//        BrowserContext context = playwright.chromium().launch(
-//                new BrowserType.LaunchOptions()
-//                        .setHeadless(false)
-//        ).newContext();
-//        return context.newPage();
-//    }
 }

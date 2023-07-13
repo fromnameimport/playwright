@@ -4,15 +4,7 @@ import Base.TestBase;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.BoundingBox;
 
-import java.util.Collections;
-import java.util.List;
-
 public class AdminPage extends TestBase {
-    // ---------------------------test data---------------------------
-    String username = "shanmukhapriya7";
-    String employeeName = "Govind Priya";
-    String userRole = "ESS";
-    String status = "Enabled";
     // ---------------------------HEADER PANEL---------------------------
     Locator userManagementDropdownButton = page.locator("i.bi-chevron-down").nth(0);
     Locator jobDropdownButton = page.locator("i.bi-chevron-down").nth(1);
@@ -53,12 +45,11 @@ public class AdminPage extends TestBase {
     Locator deleteUserButtons = page.locator("button > i.bi-trash");
     Locator usersList = page.locator("div.oxd-table-body > div");
 
-    public AdminPage openSystemUsersSearch() {
+    public void openSystemUsersSearch() {
         String display = (String) systemUsersContainer.evaluate("(element) => window.getComputedStyle(element).getPropertyValue('display')");
         if (!display.equals("block")) {
             openSystemUsersButton.click();
         }
-        return this;
     }
     public void openSaveSystemUserPage() {
         addButton.click();
@@ -67,11 +58,8 @@ public class AdminPage extends TestBase {
         systemUsersUserNameInput.type(name);
         return this;
     }
-    private AdminPage enterEmployeeName(String name) throws InterruptedException {
-//        BoundingBox box = systemUsersEmployeeNameInput.boundingBox();
+    private AdminPage enterEmployeeName(String name) {
         systemUsersEmployeeNameInput.type(name);
-//        Thread.sleep(3000);
-//        page.mouse().click(box.x + box.width, box.y + box.height + 30);
         return this;
     }
     private AdminPage selectUserRole(String userRole) {
@@ -123,8 +111,5 @@ public class AdminPage extends TestBase {
     }
     public String getSearchedUserStatus() {
         return userData.nth(9).textContent();
-    }
-    public List<Locator> getSearchedUsersList() {
-        return Collections.singletonList(usersList);
     }
 }

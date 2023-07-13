@@ -35,7 +35,6 @@ Feature: test
     And I delete searched user
   @accessibility
   Scenario: Pages accessibility
-#    Given  I open "Login" page
     Given I logged out
     Then I check the "Login" page for accessibility
     Then I login with following credentials: username "Admin", password "admin123"

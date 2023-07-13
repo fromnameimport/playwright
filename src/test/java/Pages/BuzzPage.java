@@ -73,6 +73,11 @@ public class BuzzPage extends TestBase {
         newPostInput.fill(text);
         postButton.click();
     }
+    public void createComment(String comment, int postNum) {
+        commentButtons.nth(postNum).click();
+        postCommentInput.type(comment);
+        page.keyboard().press("ENTER");
+    }
     public void editLastPost(String text) {
         commentMoreOptionsButtons.nth(0).click();
         editPostButton.click();

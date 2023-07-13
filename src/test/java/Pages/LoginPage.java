@@ -31,9 +31,4 @@ public class LoginPage extends TestBase {
     public void login(String name, String password) {
         enterUsername(name).enterPassword(password).clickLoginButton();
     }
-
-    // Asserts
-//    public void assertLoginIsSuccessful(String dashboardUrl) {
-//        Assert.assertEquals(page.url(), dashboardUrl);
-//    }
 }
