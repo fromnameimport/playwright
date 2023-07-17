@@ -24,6 +24,7 @@ public class Steps extends TestBase {
     public static String loginPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
     String adminPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
     String dashboardPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
+    String dashboardPageTitle ="https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
     String buzzPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz";
     String adminUsername = "Admin";
     String adminRole = "Admin";
@@ -58,6 +59,7 @@ public class Steps extends TestBase {
     @Then("I verify that login is successful")
     public void i_verify_that_login_is_successful() {
         Assert.assertEquals(page.url(), dashboardPageUrl);
+        Assert.assertEquals(getPageTitleText(), dashboardPageTitle);
     }
     @Then("I verify that new post is present")
     public void i_verify_that_new_post_is_present() {
