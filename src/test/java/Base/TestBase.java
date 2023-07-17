@@ -17,6 +17,9 @@ public class TestBase {
         page.close();
     }
 
+    public String getPageTitleText() {
+        return page.locator("span.oxd-topbar-header-breadcrumb > h6").textContent();
+    }
     public String getLoginPageUrl() {
         return "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
     }
