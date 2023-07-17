@@ -7,9 +7,8 @@ import org.testng.Assert;
 
 public class BuzzPage extends TestBase {
     //--------------------------Single elements--------------------------
-    Locator newPostInput = page.getByPlaceholder("What's on your mind?");
+    Locator postInput = page.getByPlaceholder("What's on your mind?");
     Locator postCommentInput = page.getByPlaceholder("Write your comment...");
-    Locator sharePostCommentInput = page.getByPlaceholder("What's on your mind?");
     Locator sharePostButton = page.locator("button:text('Share')");
     Locator closeSharePostButton = page.locator("button.oxd-dialog-close-button-position");
     Locator postButton = page.locator("button:text('Post')").nth(0);
@@ -29,6 +28,7 @@ public class BuzzPage extends TestBase {
     Locator posts = page.locator("div.oxd-grid-item--gutters");
     Locator likePostButtons = page.locator("div.orangehrm-buzz-post-actions > div");
     Locator commentButtons = page.locator("i.bi-chat-text-fill");
+    Locator commentBodies = page.locator("span.orangehrm-post-comment-text");
     Locator sharePostButtons = page.locator("i.bi-share-fill");
     Locator postTexts = page.locator("p.orangehrm-buzz-post-body-text");
     Locator postCommentTexts = page.locator("span.orangehrm-post-comment-text");
@@ -57,6 +57,10 @@ public class BuzzPage extends TestBase {
                 getDigits(page.locator("div.orangehrm-buzz-stats-row > p").nth(postNumber * 3 + 1).textContent())
         );
     }
+    private String getPostCommentBody(int postNumber) {
+        commentButtons.nth(postNumber).click();
+        return commentBodies.nth(postNumber).textContent();
+    }
     private int getPostSharesQty(int postNumber) {
         if (postNumber == 0) {
             return Integer.parseInt(StringUtils.
@@ -70,13 +74,8 @@ public class BuzzPage extends TestBase {
 
     // Actions
     public void createTextPost(String text) {
-        newPostInput.fill(text);
+        postInput.fill(text);
         postButton.click();
-    }
-    public void createComment(String comment, int postNum) {
-        commentButtons.nth(postNum).click();
-        postCommentInput.type(comment);
-        page.keyboard().press("ENTER");
     }
     public void editLastPost(String text) {
         commentMoreOptionsButtons.nth(0).click();
@@ -89,6 +88,11 @@ public class BuzzPage extends TestBase {
         commentMoreOptionsButtons.nth(0).click();
         deletePostButton.click();
         submitDeletingButton.click();
+    }
+    public void createComment(String comment, int postNum) {
+        commentButtons.nth(postNum).click();
+        postCommentInput.type(comment);
+        page.keyboard().press("ENTER");
     }
 
     // Asserts
