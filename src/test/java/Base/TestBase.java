@@ -1,17 +1,36 @@
 package Base;
 
+import Util.ConfigProperties;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 public class TestBase {
-    static Playwright playwright = Playwright.create();;
-    static BrowserContext context = playwright.chromium().launch(
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false)
-        ).newContext();;
-    public static Page page = context.newPage();;
+    static Playwright playwright;
+    static BrowserContext context;
+    public static Page page;
+    public static void initialize() {
+        ConfigProperties.initializePropertyFile();
+        String browserType = ConfigProperties.properties.getProperty("BrowserType");
+
+        playwright = Playwright.create();
+        switch (browserType) {
+            case "Chrome" -> context = playwright.chromium().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false)
+            ).newContext();
+            case "Firefox" -> context = playwright.firefox().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false)
+            ).newContext();
+            case "Safari" -> context = playwright.webkit().launch(
+                    new BrowserType.LaunchOptions()
+                            .setHeadless(false)
+            ).newContext();
+        }
+        page = context.newPage();
+    }
 
     public static void closePage() {
         page.close();
