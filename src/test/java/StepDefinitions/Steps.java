@@ -2,8 +2,10 @@ package StepDefinitions;
 
 import Base.TestBase;
 import Pages.*;
+import Util.ConfigProperties;
 import com.deque.html.axecore.playwright.AxeBuilder;
 import com.deque.html.axecore.results.AxeResults;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
@@ -20,15 +22,20 @@ public class Steps extends TestBase {
     BuzzPage buzzPage = new BuzzPage();
     SaveSystemUserPage saveSystemUserPage = new SaveSystemUserPage();
 
+    @BeforeAll
+    public static void beforeAll() {
+        TestBase.initialize();
+    }
+
     // ---------------------------Test Data----------------------------
-    public static String loginPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-    String adminPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
-    String dashboardPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-    String dashboardPageTitle ="https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-    String buzzPageUrl ="https://opensource-demo.orangehrmlive.com/web/index.php/buzz/viewBuzz";
-    String adminUsername = "Admin";
-    String adminRole = "Admin";
-    String adminStatus = "Enabled";
+    String loginPageUrl = ConfigProperties.properties.getProperty("loginPageUrl");
+    String adminPageUrl = ConfigProperties.properties.getProperty("adminPageUrl");
+    String dashboardPageUrl = ConfigProperties.properties.getProperty("dashboardPageUrl");
+    String dashboardPageTitle =ConfigProperties.properties.getProperty("dashboardPageTitle");
+    String buzzPageUrl = ConfigProperties.properties.getProperty("buzzPageUrl");
+    String adminUsername = ConfigProperties.properties.getProperty("adminName");
+    String adminRole = ConfigProperties.properties.getProperty("adminRole");
+    String adminStatus = ConfigProperties.properties.getProperty("adminStatus");
 
     // ---------------------------Temp Variables----------------------------
     String tempNewPostBody = "";
