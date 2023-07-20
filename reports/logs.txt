@@ -1,0 +1,20 @@
+Test suite started: 2023/07/20 11:41:49
+     Test 1 started, status:  SUCCESS: 2023/07/20 11:42:12
+     Test 2 started, status:  SUCCESS: 2023/07/20 11:42:28
+     Test 3 started, status:  SUCCESS: 2023/07/20 11:42:32
+     Test 4 started, status: FAILED: 2023/07/20 11:42:59
+     Test 5 started, status:  SUCCESS: 2023/07/20 11:43:08
+     Test 6 started, status:  SUCCESS: 2023/07/20 11:43:19
+     Test 7 started, status:  SUCCESS: 2023/07/20 11:43:32
+Test suite finished: 2023/07/20 11:43:33
+
+Test suite started: 2023/07/20 11:44:21
+     Test 1 started, status:  SUCCESS: 2023/07/20 11:44:38
+     Test 2 started, status: FAILED: 2023/07/20 11:44:46
+     Test 3 started, status:  SUCCESS: 2023/07/20 11:44:51
+     Test 4 started, status:  SUCCESS: 2023/07/20 11:45:03
+     Test 5 started, status:  SUCCESS: 2023/07/20 11:45:10
+     Test 6 started, status:  SUCCESS: 2023/07/20 11:45:49
+     Test 7 started, status:  SUCCESS: 2023/07/20 11:45:59
+Test suite finished: 2023/07/20 11:45:59
+
