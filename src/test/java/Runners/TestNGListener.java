@@ -21,6 +21,7 @@ public class TestNGListener implements ITestListener {
         }
         return new PrintWriter(fileWriter);
     }
+
     public String getCurrentTime() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
@@ -31,6 +32,7 @@ public class TestNGListener implements ITestListener {
     public void onTestStart(ITestResult result) {
         count++;
     }
+
     @Override
     public void onTestSuccess(ITestResult result) {
         PrintWriter writer = printWriterInit();
