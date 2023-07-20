@@ -1,5 +1,6 @@
 package Runners;
 
+import com.microsoft.playwright.Page;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -7,8 +8,11 @@ import org.testng.ITestResult;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import static Base.TestBase.page;
 
 public class TestNGListener implements ITestListener {
     int count = 0;
@@ -23,7 +27,7 @@ public class TestNGListener implements ITestListener {
     }
 
     public String getCurrentTime() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd_HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         return dateTimeFormatter.format(now);
     }
@@ -45,6 +49,9 @@ public class TestNGListener implements ITestListener {
         PrintWriter writer = printWriterInit();
         writer.println("     Test " + count + " started, status: FAILED: " + getCurrentTime());
         writer.close();
+        page.screenshot(new Page.ScreenshotOptions()
+                .setPath(Paths.get("snaps/test" + count + "fail.png"))
+                .setFullPage(true));
     }
 
     @Override
