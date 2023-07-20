@@ -2,6 +2,7 @@ package StepDefinitions;
 
 import Base.TestBase;
 import Pages.*;
+import Runners.TestNGListener;
 import Util.ConfigProperties;
 import com.deque.html.axecore.playwright.AxeBuilder;
 import com.deque.html.axecore.results.AxeResults;
@@ -9,11 +10,13 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Listeners(TestNGListener.class)
 public class Steps extends TestBase {
     LoginPage loginPage = new LoginPage();
     SidePanel sidePanel = new SidePanel();
