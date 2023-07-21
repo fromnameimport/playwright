@@ -4,10 +4,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="src/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="src/images/logo.png" alt="Logo" width="100" height="80">
   </a>
 
-<h3 align="center">Mini portfolio project</h3>
+<h1 align="center">Mini test automation project</h1>
 
   <p align="center">Playwright+TestNG+Cucumber</p>
 </div>
@@ -32,11 +32,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -66,9 +62,6 @@ This is a small project to automate a test HRM site using Playwright, TestNG and
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
