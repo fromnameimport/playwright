@@ -108,6 +108,6 @@ This is a small project to automate a test HRM site using Playwright, TestNG and
 
 Telegram - [@from_names_import_smth](https://t.me/from_names_import_smth)
 
-Project Link: [https://github.com/fromnameimport/playwright)
+Project Link: [https://github.com/fromnameimport/playwright](https://github.com/fromnameimport/playwright)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
